@@ -36,3 +36,8 @@
 # Debug files
 *.dSYM/
 
+# Custom
+test.*
+test
+*.iso
+log
