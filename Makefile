@@ -1,17 +1,17 @@
 OBJECTS = loader.o kmain.o
 CC = gcc
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
-         -nostartfiles -nodefaultlibs -Wall -Wextra -Werror
+         -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
 LD = ld
 LDFLAGS = -T link.ld -melf_i386
 AS = nasm
-ASFLAGS = -f elf32
+ASFLAGS = -f elf
 QEMU = qemu-system-i386
 
 all: kernel.elf
 
 kernel.elf: $(OBJECTS)
-	$(LD) $(LDFLAGS) $? -o $@
+	$(LD) $(LDFLAGS) $(OBJECTS) -o $@
 
 os.iso: kernel.elf
 	cp $< iso/boot/$<

@@ -1,6 +1,6 @@
 global loader
 
-extern testfunc
+extern kmain
 
 MAGIC_NUMBER		equ 0x1BADB002
 FLAGS				equ 0x0
@@ -12,17 +12,17 @@ section .text
 align 4
 	dd	MAGIC_NUMBER
 	dd	FLAGS
-	dd	CHECKSUM					; CHECKSUM + MAGIC_NUMBER should equal FLAGS
+	dd	CHECKSUM                                  ; CHECKSUM + MAGIC_NUMBER should equal FLAGS
 
-loader:                             ; linker entry point
+loader:                                           ; linker entry point
 	mov eax, 0xCAFEBABE
-	mov	esp, kernel_stack + KERNEL_STACK_SIZE	; point esp to the end of the kernel stack
+	mov	esp, kernel_stack + KERNEL_STACK_SIZE     ; point esp to the end of the kernel stack
 
-	call testfunc
+	call kmain
 loop:
 	jmp loop
 
-section .bss:
+section .bss
 align 4
 kernel_stack:
-	resb KERNEL_STACK_SIZE			; reserve stack for the kernel
+	resb KERNEL_STACK_SIZE                       ; reserve stack for the kernel

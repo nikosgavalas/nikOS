@@ -1,5 +1,7 @@
 
-void testfunc()
+
+
+void kmain()
 {
-	asm ("hlt");
+	return;
 }
