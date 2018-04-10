@@ -1,18 +1,24 @@
 global loader
 
-MAGIC_NUMBER	equ 0x1BADB002
-FLAGS			equ 0x0
-CHECKSUM		equ -MAGIC_NUMBER
+MAGIC_NUMBER		equ 0x1BADB002
+FLAGS				equ 0x0
+CHECKSUM			equ -MAGIC_NUMBER
 
-section .text:
+KERNEL_STACK_SIZE	equ 4096
 
+section .text
 align 4
 	dd	MAGIC_NUMBER
 	dd	FLAGS
-	dd	CHECKSUM
+	dd	CHECKSUM					; CHECKSUM + MAGIC_NUMBER should equal FLAGS
 
 loader:                             ; linker entry point
-	mov	eax, 0xCAFEBABE             ; magic number
+	mov eax, 0xCAFEBABE
+	mov	esp, kernel_stack + KERNEL_STACK_SIZE	; point esp to the end of the kernel stack
 
-loop:
-	jmp	loop
+	hlt
+
+section .bss:
+align 4
+kernel_stack:
+	resb KERNEL_STACK_SIZE			; reserve stack for the kernel

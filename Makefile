@@ -1,19 +1,20 @@
-# http://www.nasm.us/doc/
-NASM=nasm
-
-# https://qemu.weilnetz.de/doc/qemu-doc.html#index-_002dserial
-QEMU=qemu-system-i386
+OBJECTS = loader.o kmain.o
+CC = gcc
+CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
+         -nostartfiles -nodefaultlibs -Wall -Wextra -Werror
+LD = ld
+LDFLAGS = -T link.ld -melf_i386
+AS = nasm
+ASFLAGS = -f elf32
+QEMU = qemu-system-i386
 
 all: kernel.elf
 
-kernel.elf: link.ld loader.o
-	ld -T $< -melf_i386 loader.o -o $@
-	mv $@ iso/boot/$@
-
-loader.o: loader.s
-	nasm -f elf32 $?
+kernel.elf: $(OBJECTS)
+	$(LD) $(LDFLAGS) $? -o $@
 
 os.iso: kernel.elf
+	cp $< iso/boot/$<
 	genisoimage -R \
 		-b boot/grub/stage2_eltorito \
 		-no-emul-boot \
@@ -30,8 +31,12 @@ run: os.iso
 		-cdrom $? \
 		-serial file:log/log.txt
 
+%.o: %.c
+	$(CC) $(CFLAGS) $< -o $@
+
+%.o: %.s
+	$(AS) $(ASFLAGS) $< -o $@
+
 clean:
-	rm *.o
-	rm *.iso
-	rm log/log.txt
+	rm *.o kernel.elf os.iso log/log.txt
 
