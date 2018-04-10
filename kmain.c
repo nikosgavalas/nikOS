@@ -1,0 +1,5 @@
+
+void testfunc()
+{
+	asm ("hlt");
+}

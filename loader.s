@@ -1,5 +1,7 @@
 global loader
 
+extern testfunc
+
 MAGIC_NUMBER		equ 0x1BADB002
 FLAGS				equ 0x0
 CHECKSUM			equ -MAGIC_NUMBER
@@ -16,7 +18,9 @@ loader:                             ; linker entry point
 	mov eax, 0xCAFEBABE
 	mov	esp, kernel_stack + KERNEL_STACK_SIZE	; point esp to the end of the kernel stack
 
-	hlt
+	call testfunc
+loop:
+	jmp loop
 
 section .bss:
 align 4
