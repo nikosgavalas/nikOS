@@ -2,11 +2,10 @@
 
 Hobby OS built from scratch.
 
-Following the [littleOSbook](https://littleosbook.github.io/)
+[LittleOSbook](https://littleosbook.github.io/) helped me get started, excellent resource.
 
 To use:
 ```
 $ apt install qemu nasm genisoimage build-essential
-$ make
 $ make run
 ```
