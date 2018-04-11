@@ -1,7 +1,8 @@
 OBJECTS = loader.o kmain.o drivers/io.o drivers/framebuffer.o
 CC = gcc
+# remove the -g flag if no debugging is needed, because it makes the executable bigger
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
-         -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
+         -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c -g
 LD = ld
 LDFLAGS = -T link.ld -melf_i386
 AS = nasm
@@ -30,6 +31,9 @@ run: os.iso
 	$(QEMU) -monitor stdio \
 		-cdrom $? \
 		-serial file:log/log.txt
+
+debug: os.iso debug.gdb
+	$(QEMU) -S -s -cdrom $<
 
 %.o: %.c
 	$(CC) $(CFLAGS) $< -o $@

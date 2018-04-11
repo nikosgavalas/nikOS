@@ -17,15 +17,6 @@ void fb_move_cursor(unsigned short pos) {
 	outb(FB_PORT_DATA, (unsigned char) (pos & 0x00ff));
 }
 
-/*
-void fb_write_cell_coord(unsigned int row, unsigned int col,
-                         char c, unsigned char fg, unsigned char bg) {
-	if (row < FB_ROWS && col < FB_COLS) {
-		fb_write_cell(row * 80 + col, c, fg, bg);
-	}
-}
-*/
-
 void fb_clear() {
 	for (unsigned int i = 0; i < FB_MAX_POS; i++)
 		fb_write_cell(i, ' ', FB_COLOR_BLACK, FB_COLOR_LIGHT_GREY);
