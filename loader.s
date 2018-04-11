@@ -2,7 +2,7 @@ global loader
 
 extern kmain
 
-MAGIC_NUMBER		equ 0x1BADB002
+MAGIC_NUMBER		equ 0x1badb002
 FLAGS				equ 0x0
 CHECKSUM			equ -MAGIC_NUMBER
 
