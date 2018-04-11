@@ -39,4 +39,3 @@ run: os.iso
 
 clean:
 	rm *.o kernel.elf os.iso log/log.txt
-

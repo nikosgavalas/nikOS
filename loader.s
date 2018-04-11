@@ -15,12 +15,10 @@ align 4
 	dd	CHECKSUM                                  ; CHECKSUM + MAGIC_NUMBER should equal FLAGS
 
 loader:                                           ; linker entry point
-	mov eax, 0xCAFEBABE
 	mov	esp, kernel_stack + KERNEL_STACK_SIZE     ; point esp to the end of the kernel stack
 
 	call kmain
-loop:
-	jmp loop
+	hlt
 
 section .bss
 align 4
