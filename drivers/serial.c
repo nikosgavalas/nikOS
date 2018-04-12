@@ -65,8 +65,14 @@ void serial_init_port(unsigned short com, unsigned short divisor) {
 	serial_configure_modem(com);
 }
 
+/* serial_write checks if the port buffers are empty first. 
+ * If they are not, it will spin until they are, before attempting to
+ * send any data to the port.
+ */
 int serial_write(unsigned short com, char *data, unsigned int len) {
 	unsigned int i = 0;
+	while (!serial_transmit_fifo_is_empty(com))
+		;
 	for (i = 0; i < len; i++) {
 		outb(SERIAL_PORT_DATA(com), *data++);
 	}

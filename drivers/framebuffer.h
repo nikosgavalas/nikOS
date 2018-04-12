@@ -31,5 +31,6 @@ void fb_clear();
 void fb_scroll();
 int fb_write(char *buf, unsigned int len);
 void fb_puts(char *buf);
+void fb_putc(char c);
 
 #endif // _FRAMEBUFFER_H_INCLUDED_

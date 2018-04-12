@@ -10,4 +10,4 @@
 void serial_init_port(unsigned short com, unsigned short divisor);
 int serial_write(unsigned short com, char *data, unsigned int len);
 
-#endif // _SERIAL_H_INCLUDED_
+#endif // _SERIAL_H_INCLUDED

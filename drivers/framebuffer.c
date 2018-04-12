@@ -63,3 +63,8 @@ void fb_puts(char *buf) {
 	while (*buf)
 		fb_write(buf++, 1);
 }
+
+void fb_putc(char c) {
+	char *tmp = &c;
+	fb_write(tmp, 1);
+}
