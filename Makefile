@@ -1,4 +1,4 @@
-OBJECTS = loader.o kmain.o drivers/io.o drivers/framebuffer.o
+OBJECTS = loader.o kmain.o drivers/io.o drivers/framebuffer.o drivers/serial.o
 CC = gcc
 # remove the -g flag if no debugging is needed, because it makes the executable bigger
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
