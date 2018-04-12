@@ -38,7 +38,7 @@ void fb_scroll() {
 		fb_write_cell(i, ' ', FB_COLOR_BLACK, FB_COLOR_LIGHT_GREY);
 }
 
-int write(char *buf, unsigned int len) {
+int fb_write(char *buf, unsigned int len) {
 	unsigned int i = 0;
 	for (i = 0; i < len; i++) {
 		if (curr_pos >= FB_MAX_POS) {
@@ -51,7 +51,7 @@ int write(char *buf, unsigned int len) {
 	return i;
 }
 
-void puts(char *buf) {
+void fb_puts(char *buf) {
 	while (*buf)
-		write(buf++, 1);
+		fb_write(buf++, 1);
 }

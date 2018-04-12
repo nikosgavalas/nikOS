@@ -32,6 +32,7 @@ run: os.iso
 		-cdrom $? \
 		-serial file:log/log.txt
 
+# make sure to run $ make debug with the -g flag in the gcc
 debug: os.iso debug.gdb
 	$(QEMU) -S -s -cdrom $<
 

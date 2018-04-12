@@ -32,11 +32,9 @@
 
 void fb_write_cell(unsigned int i, char c, unsigned char fg, unsigned char bg);
 void fb_move_cursor(unsigned short pos);
-/* void fb_write_cell_coord(unsigned int row, unsigned int col,
-						 char c, unsigned char fg, unsigned char bg); */
 void fb_clear();
 void fb_scroll();
-int write(char *buf, unsigned int len);
-void puts(char *buf);
+int fb_write(char *buf, unsigned int len);
+void fb_puts(char *buf);
 
 #endif // _FRAMEBUFFER_H_INCLUDED_
