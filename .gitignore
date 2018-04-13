@@ -40,4 +40,4 @@
 test.*
 test
 *.iso
-log
+log.txt

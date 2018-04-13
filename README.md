@@ -1,6 +1,6 @@
 # nikOS
 
-Hobby OS built from scratch.
+Minimal hobby Operating System built from scratch, for learning purposes.
 
 [LittleOSbook](https://littleosbook.github.io/) helped me get started, excellent resource.
 

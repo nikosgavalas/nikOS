@@ -1,4 +1,5 @@
-OBJECTS = loader.o kmain.o drivers/io.o drivers/framebuffer.o drivers/serial.o
+OBJECTS = loader.o kmain.o gdt.o asm.o \
+          drivers/io.o drivers/framebuffer.o drivers/serial.o
 CC = gcc
 # remove the -g flag if no debugging is needed, because it makes the executable bigger
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
@@ -30,7 +31,7 @@ os.iso: kernel.elf
 run: os.iso
 	$(QEMU) -monitor stdio \
 		-cdrom $? \
-		-serial file:log/log.txt
+		-serial file:log.txt
 
 # make sure to run $ make debug with the -g flag in the gcc
 debug: os.iso debug.gdb
@@ -43,4 +44,4 @@ debug: os.iso debug.gdb
 	$(AS) $(ASFLAGS) $< -o $@
 
 clean:
-	rm -rf *.o drivers/*.o kernel.elf os.iso log/log.txt
+	rm -rf *.o drivers/*.o kernel.elf os.iso log.txt
