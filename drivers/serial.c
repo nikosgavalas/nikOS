@@ -1,5 +1,5 @@
 #include "serial.h"
-#include "io.h"
+#include "../asm.h"
 
 /* The serial ports use I/O ports, for configuration.
  * All the I/O ports are calculated relative to the data port. This is because
@@ -77,4 +77,9 @@ int serial_write(unsigned short com, char *data, unsigned int len) {
 		outb(SERIAL_PORT_DATA(com), *data++);
 	}
 	return i;
+}
+
+void serial_puts(unsigned short com, char *data) {
+	while (*data)
+		serial_write(com, data++, 1);
 }

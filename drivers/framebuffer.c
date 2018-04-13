@@ -1,4 +1,4 @@
-#include "io.h"
+#include "../asm.h"
 #include "framebuffer.h"
 
 #define FB_BASE_ADDR 0x000b8000
@@ -48,12 +48,24 @@ void fb_scroll() {
 
 int fb_write(char *buf, unsigned int len) {
 	unsigned int i = 0;
+	unsigned short curr_row;
 	for (i = 0; i < len; i++) {
+		curr_row = curr_pos / FB_COLS;
+		switch (buf[i]) {
+			case '\r':
+				curr_pos = curr_row * FB_COLS; // move to the beginning of row
+				break;
+			case '\n':
+				fb_write_cell(curr_pos, ' ', FB_COLOR_BLACK, FB_COLOR_LIGHT_GREY);
+				curr_pos = (curr_row + 1) * FB_COLS; // move to the row below
+				break;
+			default:
+				fb_write_cell(curr_pos++, buf[i], FB_COLOR_BLACK, FB_COLOR_LIGHT_GREY);
+		}
 		if (curr_pos >= FB_MAX_POS) {
 			fb_scroll();
 			curr_pos = FB_MAX_POS - FB_COLS;
 		}
-		fb_write_cell(curr_pos++, buf[i], FB_COLOR_BLACK, FB_COLOR_LIGHT_GREY);
 		fb_move_cursor(curr_pos);
 	}
 	return (int) i;

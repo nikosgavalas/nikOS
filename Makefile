@@ -1,5 +1,7 @@
-OBJECTS = loader.o kmain.o gdt.o asm.o \
-          drivers/io.o drivers/framebuffer.o drivers/serial.o
+OBJECTS = loader.o kmain.o asm.o \
+          drivers/framebuffer.o drivers/serial.o \
+		  system/gdt.o \
+		  util/logger.o
 CC = gcc
 # remove the -g flag if no debugging is needed, because it makes the executable bigger
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
@@ -44,4 +46,7 @@ debug: os.iso debug.gdb
 	$(AS) $(ASFLAGS) $< -o $@
 
 clean:
-	rm -rf *.o drivers/*.o kernel.elf os.iso log.txt
+	rm -rf *.o kernel.elf os.iso log.txt \
+		drivers/*.o \
+		system/*.o \
+		util/*.o
