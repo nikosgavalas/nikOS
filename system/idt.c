@@ -10,4 +10,6 @@ struct idt_entry {
 
 struct idt_entry idt[256];
 
-// asm_load_idt((void *) &idt);
+void idt_install() {
+	asm_load_idt((void *) &idt);
+}
