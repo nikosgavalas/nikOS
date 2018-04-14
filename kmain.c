@@ -1,6 +1,8 @@
 #include "system/gdt.h"
+
 #include "drivers/serial.h"
 #include "drivers/framebuffer.h"
+
 #include "util/logger.h"
 #include "idt.h"
 #include "interrupt.h"
@@ -10,7 +12,7 @@ char *welcome  = ""
 "  _ __ (_) | __/ _ \\/ ___| \n"
 " | '_ \\| | |/ / | | \\___ \\ \n"
 " | | | | |   <| |_| |___) |\n"
-" |_| |_|_|_|\\\\_\\___/|____/ \n"
+" |_| |_|_|_|\\_\\\\___/|____/ \n"
 "";
 
 /* Kernel Main */

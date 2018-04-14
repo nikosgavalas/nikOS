@@ -49,4 +49,5 @@ clean:
 	rm -rf *.o kernel.elf os.iso log.txt \
 		drivers/*.o \
 		system/*.o \
-		util/*.o
+		util/*.o \
+		asm/*.o
