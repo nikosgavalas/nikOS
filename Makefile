@@ -1,6 +1,7 @@
-OBJECTS = loader.o kmain.o asm.o \
+OBJECTS = loader.o kmain.o \
+          asm/io.o asm/desc_tables.o \
           drivers/framebuffer.o drivers/serial.o \
-		  system/gdt.o \
+		  system/gdt.o system/idt.o \
 		  util/logger.o
 CC = gcc
 # remove the -g flag if no debugging is needed, because it makes the executable bigger
@@ -49,4 +50,5 @@ clean:
 	rm -rf *.o kernel.elf os.iso log.txt \
 		drivers/*.o \
 		system/*.o \
-		util/*.o
+		util/*.o \
+		asm/*.o
