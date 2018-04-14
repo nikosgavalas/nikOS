@@ -1,4 +1,4 @@
-OBJECTS = loader.o kmain.o asm.o \
+OBJECTS = loader.o kmain.o asm.o idt.o interrupt.o \
           drivers/framebuffer.o drivers/serial.o \
 		  system/gdt.o \
 		  util/logger.o

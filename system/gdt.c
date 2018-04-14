@@ -3,26 +3,11 @@
 
 #define GDT_NUM_SEGMENTS 3
 
-typedef enum gdt_segment {
-	NULL_SEG,
-	CODE_SEG,
-	DATA_SEG
-} gdt_segment_t;
+#define CODE_SEGMENT_BASE 0
+#define CODE_SEGMENT_LIMIT 0xffffffff
 
-/* Format of the gdt table: https://wiki.osdev.org/Global_Descriptor_Table */
-struct gdt_entry {
-	unsigned short limit_low;
-	unsigned short base_low;
-	unsigned char base_middle;
-	unsigned char access;
-	unsigned char granularity;	/* this byte contains the flags too */
-	unsigned char base_high;
-} __attribute__((packed));
-
-struct gdt_ptr {
-	unsigned short size;
-	unsigned int offset;
-} __attribute__((packed));
+#define DATA_SEGMENT_BASE 0
+#define DATA_SEGMENT_LIMIT 0xffffffff
 
 struct gdt_entry gdt[GDT_NUM_SEGMENTS];
 struct gdt_ptr gdtp;
@@ -53,13 +38,15 @@ void gdt_install() {
 	 * Flags = 1100: Gr = 1 (4KiB page granularity)
 	 *               Sz = 1 (32-bit protected mode)
 	 */
-	gdt_init_segment(CODE_SEG, 0, 0xffffffff, 0b10011010, 0b00001100);
+	gdt_init_segment(CODE_SEG, CODE_SEGMENT_BASE, CODE_SEGMENT_LIMIT, 
+	                 0b10011010, 0b00001100);
 
 	/* Data segment: same as the CS, except Ex bit is 0 (->DS)
 	 * With these configs in the DS -> the stack grows down,
 	 * and also the DS is writable.
 	 */
-	gdt_init_segment(DATA_SEG, 0, 0xffffffff, 0b10010010, 0b00001100);
+	gdt_init_segment(DATA_SEG, DATA_SEGMENT_BASE, DATA_SEGMENT_LIMIT, 
+	                 0b10010010, 0b00001100);
 
 	gdtp.size = sizeof(gdt) - 1;
 	gdtp.offset = (unsigned int) &gdt;

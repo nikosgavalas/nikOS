@@ -2,7 +2,7 @@
 
 Minimal hobby Operating System built from scratch, for learning purposes.
 
-[LittleOSbook](https://littleosbook.github.io/) helped me get started, an excellent resource, together with the [OSDev Wiki](https://wiki.osdev.org/Expanded_Main_Page).
+[LittleOSbook](https://littleosbook.github.io/) helped me get started. It's a good resource, even if it has some errors and doesn't mention at all certain important things...which I later found on the awesome [OSDev Wiki](https://wiki.osdev.org/Expanded_Main_Page).
 
 To use:
 ```

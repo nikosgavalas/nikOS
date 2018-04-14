@@ -2,6 +2,8 @@
 #include "drivers/serial.h"
 #include "drivers/framebuffer.h"
 #include "util/logger.h"
+#include "idt.h"
+#include "interrupt.h"
 
 char *welcome  = ""
 "        _ _     ___  ____  \n"
@@ -12,7 +14,8 @@ char *welcome  = ""
 "";
 
 /* Kernel Main */
-void kmain() {
+void kmain() 
+{
 	/* Clear the screen */
 	fb_clear();
 
@@ -22,7 +25,12 @@ void kmain() {
 	log(CONSOLE, INFO, "Initializing COM1 serial port...");
 	serial_init_port(SERIAL_BASE_COM1, 1);
 
+	log(CONSOLE, INFO, "Installing the Interrupt Descriptor Table...");
+	idt_install();
+
 	fb_puts(welcome);
+
+	interrupt();
 
 	return;
 }

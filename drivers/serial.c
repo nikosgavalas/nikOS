@@ -32,7 +32,8 @@ void serial_configure_baud_rate(unsigned short com, unsigned short divisor)
  * no parity bits, one stop bit and break control
  * disabled:
  */
-void serial_configure_line(unsigned short com) {
+void serial_configure_line(unsigned short com) 
+{
 	outb(SERIAL_PORT_LINE_COMMAND(com), 0x03);
 }
 
@@ -40,25 +41,29 @@ void serial_configure_line(unsigned short com) {
  * enables FIFO, clears both receiver and transmission FIFO queues,
  * and sets the size of the queue to 14 bytes
  */
-void serial_configure_buffers(unsigned short com) {
+void serial_configure_buffers(unsigned short com) 
+{
 	outb(SERIAL_PORT_FIFO_COMMAND(com), 0xc7);
 }
 
 /* Sets the Ready To Transmit (RTS) and Data Terminal Ready (DTR) pins to 1,
  * which means that the port is ready to send data.
  */
-void serial_configure_modem(unsigned short com) {
+void serial_configure_modem(unsigned short com)
+{
 	outb(SERIAL_PORT_MODEM_COMMAND(com), 0x03);
 }
 
 /* To write to a serial port, we need to know that all previous writes are 
  * finished. To see if the FIFO queue is empty, we can "query" the serial port
  * and check the bit 5 of the status byte */
-int serial_transmit_fifo_is_empty(unsigned int com) {
+int serial_transmit_fifo_is_empty(unsigned int com) 
+{
 	return inb(SERIAL_PORT_LINE_STATUS(com)) & 0x20;
 }
 
-void serial_init_port(unsigned short com, unsigned short divisor) {
+void serial_init_port(unsigned short com, unsigned short divisor) 
+{
 	serial_configure_baud_rate(com, divisor);
 	serial_configure_line(com);
 	serial_configure_buffers(com);
@@ -69,7 +74,8 @@ void serial_init_port(unsigned short com, unsigned short divisor) {
  * If they are not, it will spin until they are, before attempting to
  * send any data to the port.
  */
-int serial_write(unsigned short com, char *data, unsigned int len) {
+int serial_write(unsigned short com, char *data, unsigned int len) 
+{
 	unsigned int i = 0;
 	while (!serial_transmit_fifo_is_empty(com))
 		;
@@ -79,7 +85,8 @@ int serial_write(unsigned short com, char *data, unsigned int len) {
 	return i;
 }
 
-void serial_puts(unsigned short com, char *data) {
+void serial_puts(unsigned short com, char *data) 
+{
 	while (*data)
 		serial_write(com, data++, 1);
 }
