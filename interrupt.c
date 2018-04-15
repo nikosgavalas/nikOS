@@ -1,14 +1,15 @@
 #include "interrupt.h"
 #include "asm.h"
 
+#include "util/logger.h"
+
 /* Causes a software interrupt */
-void interrupt() 
+void sw_interrupt() 
 {
-	asm_interrupt_1_test();
+	asm_sw_interrupt();
 }
 
-/* Interrupt Handler */
-void interrupt_handler() 
+void interrupt_handler()
 {
-	asm_interrupt_handler_1_test();
+	log(CONSOLE, INFO, "inside handler");
 }

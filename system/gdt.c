@@ -13,7 +13,8 @@ struct gdt_entry gdt[GDT_NUM_SEGMENTS];
 struct gdt_ptr gdtp;
 
 void gdt_init_segment(gdt_segment_t seg, unsigned long base, unsigned long limit, 
-                      unsigned char access, unsigned char flags) {
+                      unsigned char access, unsigned char flags)
+{
 	gdt[seg].base_low = base & 0xffff;
 	gdt[seg].base_middle = (base >> 16) & 0xff;
 	gdt[seg].base_high = (base >> 24) & 0xff;
@@ -25,7 +26,8 @@ void gdt_init_segment(gdt_segment_t seg, unsigned long base, unsigned long limit
 	gdt[seg].access = access;
 }
 
-void gdt_install() {
+void gdt_install()
+{
 
 	/* NULL segment */
 	gdt_init_segment(NULL_SEG, 0, 0, 0, 0);

@@ -37,13 +37,20 @@ asm_load_idt:
 	lidt	[eax]
 	ret
 
-; int wrapper
-global asm_interrupt_1_test
-asm_interrupt_1_test:
-	int	1
+; int wrapper (causes a software interrupt)
+global asm_sw_interrupt
+asm_sw_interrupt:
+	int	80
 	ret
 
-; interrupt handler test
-global asm_interrupt_handler_1_test
-asm_interrupt_handler_1_test:
-	reti
+; interrupt handler (FIXME: do this for all 256 ints)
+extern interrupt_handler
+global asm_interrupt_handler
+asm_interrupt_handler:
+	push	dword 0
+	push	dword 80
+	pushad
+	call interrupt_handler
+	popad
+	add	esp, 8
+	iret

@@ -1,6 +1,6 @@
 #include "idt.h"
 #include "asm.h"
-#include "interrupt.h"
+
 #include "system/gdt.h"
 
 /* https://wiki.osdev.org/Interrupt_Descriptor_Table#Structure_IA-32 */
@@ -35,8 +35,11 @@ void init_idt_entry(unsigned char num, unsigned int offset,
 
 void idt_install()
 {
+	/* Flags = 1000 1110: Present = 1, DPL = 00 (Ring 0), S = 1 (interrupt gate)
+	 *                    Type = 1110 (32-bit interrupt gate)
+	 */
 	for (unsigned int i = 0; i < 256; i++) {
-		init_idt_entry((unsigned char) i, (unsigned int) &interrupt_handler,
+		init_idt_entry((unsigned char) i, (unsigned int) &asm_interrupt_handler,
 		               SEGMENT_SELECTOR(CODE_SEG), 0b10001110);
 	}
 
