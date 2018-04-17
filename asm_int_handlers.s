@@ -1,0 +1,291 @@
+; Interrupt handlers. The handlers cannot be written in C directly
+; because we need the 'iret' instruction, see:
+; "https://wiki.osdev.org/Interrupt_Service_Routines"
+
+extern interrupt_handler  ; defined in 'interrupt.c'
+
+; Some interrupts don't have an error code.
+; For those we push code 0 to the stack.
+
+%macro asm_no_error_code_int_handler 1
+global asm_int_handler_%1
+asm_int_handler_%1:
+	push    dword 0                         ; push 0 as error code
+	push    dword %1                        ; push the interrupt number
+	jmp     asm_generic_interrupt_handler   ; jump to the common handler
+%endmacro
+
+%macro asm_error_code_int_handler 1
+global asm_int_handler_%1
+asm_int_handler_%1:
+	push    dword %1                        ; push the interrupt number
+	jmp     asm_generic_interrupt_handler   ; jump to the common handler
+%endmacro
+
+asm_generic_interrupt_handler:
+	pushad                                  ; push all general purpose regs to the stack
+	                                        ; in this order: eax, ecx, edx, ebx, esp, ebp, esi, edi
+	call interrupt_handler
+	popad
+	add	esp, 8                              ; fix the stack pointer
+	iret
+
+; The interrupts that have an error code are 8, 10, 11, 12, 13, 14, 17, 30
+; See: https://wiki.osdev.org/Exceptions
+
+asm_no_error_code_int_handler 0
+asm_no_error_code_int_handler 1
+asm_no_error_code_int_handler 2
+asm_no_error_code_int_handler 3
+asm_no_error_code_int_handler 4
+asm_no_error_code_int_handler 5
+asm_no_error_code_int_handler 6
+asm_no_error_code_int_handler 7
+asm_error_code_int_handler 8
+asm_no_error_code_int_handler 9
+asm_error_code_int_handler 10
+asm_error_code_int_handler 11
+asm_error_code_int_handler 12
+asm_error_code_int_handler 13
+asm_error_code_int_handler 14
+asm_no_error_code_int_handler 15
+asm_no_error_code_int_handler 16
+asm_error_code_int_handler 17
+asm_no_error_code_int_handler 18
+asm_no_error_code_int_handler 19
+asm_no_error_code_int_handler 20
+asm_no_error_code_int_handler 21
+asm_no_error_code_int_handler 22
+asm_no_error_code_int_handler 23
+asm_no_error_code_int_handler 24
+asm_no_error_code_int_handler 25
+asm_no_error_code_int_handler 26
+asm_no_error_code_int_handler 27
+asm_no_error_code_int_handler 28
+asm_no_error_code_int_handler 29
+asm_error_code_int_handler 30
+asm_no_error_code_int_handler 31
+asm_no_error_code_int_handler 32
+asm_no_error_code_int_handler 33
+asm_no_error_code_int_handler 34
+asm_no_error_code_int_handler 35
+asm_no_error_code_int_handler 36
+asm_no_error_code_int_handler 37
+asm_no_error_code_int_handler 38
+asm_no_error_code_int_handler 39
+asm_no_error_code_int_handler 40
+asm_no_error_code_int_handler 41
+asm_no_error_code_int_handler 42
+asm_no_error_code_int_handler 43
+asm_no_error_code_int_handler 44
+asm_no_error_code_int_handler 45
+asm_no_error_code_int_handler 46
+asm_no_error_code_int_handler 47
+asm_no_error_code_int_handler 48
+asm_no_error_code_int_handler 49
+asm_no_error_code_int_handler 50
+asm_no_error_code_int_handler 51
+asm_no_error_code_int_handler 52
+asm_no_error_code_int_handler 53
+asm_no_error_code_int_handler 54
+asm_no_error_code_int_handler 55
+asm_no_error_code_int_handler 56
+asm_no_error_code_int_handler 57
+asm_no_error_code_int_handler 58
+asm_no_error_code_int_handler 59
+asm_no_error_code_int_handler 60
+asm_no_error_code_int_handler 61
+asm_no_error_code_int_handler 62
+asm_no_error_code_int_handler 63
+asm_no_error_code_int_handler 64
+asm_no_error_code_int_handler 65
+asm_no_error_code_int_handler 66
+asm_no_error_code_int_handler 67
+asm_no_error_code_int_handler 68
+asm_no_error_code_int_handler 69
+asm_no_error_code_int_handler 70
+asm_no_error_code_int_handler 71
+asm_no_error_code_int_handler 72
+asm_no_error_code_int_handler 73
+asm_no_error_code_int_handler 74
+asm_no_error_code_int_handler 75
+asm_no_error_code_int_handler 76
+asm_no_error_code_int_handler 77
+asm_no_error_code_int_handler 78
+asm_no_error_code_int_handler 79
+asm_no_error_code_int_handler 80
+asm_no_error_code_int_handler 81
+asm_no_error_code_int_handler 82
+asm_no_error_code_int_handler 83
+asm_no_error_code_int_handler 84
+asm_no_error_code_int_handler 85
+asm_no_error_code_int_handler 86
+asm_no_error_code_int_handler 87
+asm_no_error_code_int_handler 88
+asm_no_error_code_int_handler 89
+asm_no_error_code_int_handler 90
+asm_no_error_code_int_handler 91
+asm_no_error_code_int_handler 92
+asm_no_error_code_int_handler 93
+asm_no_error_code_int_handler 94
+asm_no_error_code_int_handler 95
+asm_no_error_code_int_handler 96
+asm_no_error_code_int_handler 97
+asm_no_error_code_int_handler 98
+asm_no_error_code_int_handler 99
+asm_no_error_code_int_handler 100
+asm_no_error_code_int_handler 101
+asm_no_error_code_int_handler 102
+asm_no_error_code_int_handler 103
+asm_no_error_code_int_handler 104
+asm_no_error_code_int_handler 105
+asm_no_error_code_int_handler 106
+asm_no_error_code_int_handler 107
+asm_no_error_code_int_handler 108
+asm_no_error_code_int_handler 109
+asm_no_error_code_int_handler 110
+asm_no_error_code_int_handler 111
+asm_no_error_code_int_handler 112
+asm_no_error_code_int_handler 113
+asm_no_error_code_int_handler 114
+asm_no_error_code_int_handler 115
+asm_no_error_code_int_handler 116
+asm_no_error_code_int_handler 117
+asm_no_error_code_int_handler 118
+asm_no_error_code_int_handler 119
+asm_no_error_code_int_handler 120
+asm_no_error_code_int_handler 121
+asm_no_error_code_int_handler 122
+asm_no_error_code_int_handler 123
+asm_no_error_code_int_handler 124
+asm_no_error_code_int_handler 125
+asm_no_error_code_int_handler 126
+asm_no_error_code_int_handler 127
+asm_no_error_code_int_handler 128
+asm_no_error_code_int_handler 129
+asm_no_error_code_int_handler 130
+asm_no_error_code_int_handler 131
+asm_no_error_code_int_handler 132
+asm_no_error_code_int_handler 133
+asm_no_error_code_int_handler 134
+asm_no_error_code_int_handler 135
+asm_no_error_code_int_handler 136
+asm_no_error_code_int_handler 137
+asm_no_error_code_int_handler 138
+asm_no_error_code_int_handler 139
+asm_no_error_code_int_handler 140
+asm_no_error_code_int_handler 141
+asm_no_error_code_int_handler 142
+asm_no_error_code_int_handler 143
+asm_no_error_code_int_handler 144
+asm_no_error_code_int_handler 145
+asm_no_error_code_int_handler 146
+asm_no_error_code_int_handler 147
+asm_no_error_code_int_handler 148
+asm_no_error_code_int_handler 149
+asm_no_error_code_int_handler 150
+asm_no_error_code_int_handler 151
+asm_no_error_code_int_handler 152
+asm_no_error_code_int_handler 153
+asm_no_error_code_int_handler 154
+asm_no_error_code_int_handler 155
+asm_no_error_code_int_handler 156
+asm_no_error_code_int_handler 157
+asm_no_error_code_int_handler 158
+asm_no_error_code_int_handler 159
+asm_no_error_code_int_handler 160
+asm_no_error_code_int_handler 161
+asm_no_error_code_int_handler 162
+asm_no_error_code_int_handler 163
+asm_no_error_code_int_handler 164
+asm_no_error_code_int_handler 165
+asm_no_error_code_int_handler 166
+asm_no_error_code_int_handler 167
+asm_no_error_code_int_handler 168
+asm_no_error_code_int_handler 169
+asm_no_error_code_int_handler 170
+asm_no_error_code_int_handler 171
+asm_no_error_code_int_handler 172
+asm_no_error_code_int_handler 173
+asm_no_error_code_int_handler 174
+asm_no_error_code_int_handler 175
+asm_no_error_code_int_handler 176
+asm_no_error_code_int_handler 177
+asm_no_error_code_int_handler 178
+asm_no_error_code_int_handler 179
+asm_no_error_code_int_handler 180
+asm_no_error_code_int_handler 181
+asm_no_error_code_int_handler 182
+asm_no_error_code_int_handler 183
+asm_no_error_code_int_handler 184
+asm_no_error_code_int_handler 185
+asm_no_error_code_int_handler 186
+asm_no_error_code_int_handler 187
+asm_no_error_code_int_handler 188
+asm_no_error_code_int_handler 189
+asm_no_error_code_int_handler 190
+asm_no_error_code_int_handler 191
+asm_no_error_code_int_handler 192
+asm_no_error_code_int_handler 193
+asm_no_error_code_int_handler 194
+asm_no_error_code_int_handler 195
+asm_no_error_code_int_handler 196
+asm_no_error_code_int_handler 197
+asm_no_error_code_int_handler 198
+asm_no_error_code_int_handler 199
+asm_no_error_code_int_handler 200
+asm_no_error_code_int_handler 201
+asm_no_error_code_int_handler 202
+asm_no_error_code_int_handler 203
+asm_no_error_code_int_handler 204
+asm_no_error_code_int_handler 205
+asm_no_error_code_int_handler 206
+asm_no_error_code_int_handler 207
+asm_no_error_code_int_handler 208
+asm_no_error_code_int_handler 209
+asm_no_error_code_int_handler 210
+asm_no_error_code_int_handler 211
+asm_no_error_code_int_handler 212
+asm_no_error_code_int_handler 213
+asm_no_error_code_int_handler 214
+asm_no_error_code_int_handler 215
+asm_no_error_code_int_handler 216
+asm_no_error_code_int_handler 217
+asm_no_error_code_int_handler 218
+asm_no_error_code_int_handler 219
+asm_no_error_code_int_handler 220
+asm_no_error_code_int_handler 221
+asm_no_error_code_int_handler 222
+asm_no_error_code_int_handler 223
+asm_no_error_code_int_handler 224
+asm_no_error_code_int_handler 225
+asm_no_error_code_int_handler 226
+asm_no_error_code_int_handler 227
+asm_no_error_code_int_handler 228
+asm_no_error_code_int_handler 229
+asm_no_error_code_int_handler 230
+asm_no_error_code_int_handler 231
+asm_no_error_code_int_handler 232
+asm_no_error_code_int_handler 233
+asm_no_error_code_int_handler 234
+asm_no_error_code_int_handler 235
+asm_no_error_code_int_handler 236
+asm_no_error_code_int_handler 237
+asm_no_error_code_int_handler 238
+asm_no_error_code_int_handler 239
+asm_no_error_code_int_handler 240
+asm_no_error_code_int_handler 241
+asm_no_error_code_int_handler 242
+asm_no_error_code_int_handler 243
+asm_no_error_code_int_handler 244
+asm_no_error_code_int_handler 245
+asm_no_error_code_int_handler 246
+asm_no_error_code_int_handler 247
+asm_no_error_code_int_handler 248
+asm_no_error_code_int_handler 249
+asm_no_error_code_int_handler 250
+asm_no_error_code_int_handler 251
+asm_no_error_code_int_handler 252
+asm_no_error_code_int_handler 253
+asm_no_error_code_int_handler 254
+asm_no_error_code_int_handler 255

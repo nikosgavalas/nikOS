@@ -40,17 +40,17 @@ asm_load_idt:
 ; int wrapper (causes a software interrupt)
 global asm_sw_interrupt
 asm_sw_interrupt:
-	int	80
+	int	0x80
 	ret
 
-; interrupt handler (FIXME: do this for all 256 ints)
-extern interrupt_handler
-global asm_interrupt_handler
-asm_interrupt_handler:
-	push	dword 0
-	push	dword 80
-	pushad
-	call interrupt_handler
-	popad
-	add	esp, 8
-	iret
+; sti wrapper
+global asm_enable_interrupts
+asm_enable_interrupts:
+	sti
+	ret
+
+; cli wrapper
+global asm_disable_interrupts
+asm_disable_interrupts:
+	cli
+	ret

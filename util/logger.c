@@ -2,7 +2,8 @@
 #include "../drivers/framebuffer.h"
 #include "../drivers/serial.h"
 
-void log_puts(log_output_t dest, char *level, char *msg) {
+void log_puts(log_output_t dest, char *level, char *msg)
+{
 	switch (dest) {
 		case CONSOLE:
 			fb_puts(level);
@@ -17,7 +18,8 @@ void log_puts(log_output_t dest, char *level, char *msg) {
 	}
 }
 
-void log(log_output_t dest, log_level_t lvl, char *msg) {
+void log(log_output_t dest, log_level_t lvl, char *msg)
+{
 	switch (lvl) {
 		case DEBUG:
 			log_puts(dest, "[DEBUG] ", msg);

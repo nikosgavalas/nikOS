@@ -33,7 +33,7 @@ void kmain()
 	fb_puts(welcome);
 
 	sw_interrupt();
-	log(CONSOLE, INFO, "returned.");
+	log(CONSOLE, DEBUG, "returned.");
 
 	return;
 }

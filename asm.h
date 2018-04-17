@@ -13,6 +13,8 @@ void asm_load_idt(void *idtp);
 /* Wrapper of int */
 void asm_sw_interrupt();
 
-void asm_interrupt_handler();
+/* Wrappers of sti, cli */
+void asm_enable_interrupts();
+void asm_disable_interrupts();
 
 #endif // _ASM_H_INCLUDED_
