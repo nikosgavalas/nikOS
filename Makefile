@@ -1,15 +1,20 @@
-OBJECTS = loader.o kmain.o asm.o idt.o interrupt.o asm_int_handlers.o \
-          drivers/framebuffer.o drivers/serial.o \
-		  system/gdt.o \
-		  util/logger.o
+OBJECTS = loader.o kmain.o asm.o idt.o interrupt.o asm_int_handlers.o pic.o
+OBJECTS += drivers/framebuffer.o drivers/serial.o drivers/keyb.o
+OBJECTS += system/gdt.o
+OBJECTS += util/logger.o
+
 CC = gcc
 # remove the -g flag if no debugging is needed, because it makes the executable bigger
-CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
-         -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c -g
+CFLAGS = -m32 -c -g 
+CFLAGS += -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs
+CFLAGS += -Wall -Wextra #-Werror
+
 LD = ld
 LDFLAGS = -T link.ld -melf_i386
+
 AS = nasm
 ASFLAGS = -f elf
+
 QEMU = qemu-system-i386
 
 all: kernel.elf

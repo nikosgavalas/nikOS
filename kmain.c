@@ -7,6 +7,8 @@
 #include "idt.h"
 #include "interrupt.h"
 
+#include "pic.h"
+
 char *welcome  = ""
 "        _ _     ___  ____  \n"
 "  _ __ (_) | __/ _ \\/ ___| \n"
@@ -32,8 +34,17 @@ void kmain()
 
 	fb_puts(welcome);
 
-	sw_interrupt();
-	log(CONSOLE, DEBUG, "returned.");
+	/* Test the interrupts */
+	//sw_interrupt();
+	//log(CONSOLE, DEBUG, "returned.");
+
+	log(CONSOLE, INFO, "Initializing PIC...");
+	pic_init();
+
+	/* At this point the kernel is activated only through interrupts */
+	for (;;) {
+		asm ("hlt");
+	}
 
 	return;
 }

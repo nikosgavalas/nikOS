@@ -305,7 +305,7 @@ void idt_install()
 		init_idt_entry((unsigned char) i, (unsigned int) asm_int_handlers[i],
 		               SEGMENT_SELECTOR(CODE_SEG), 0b10001110);
 	}
-
+	
 	idtp.size = (unsigned short) sizeof(idt) - 1;
 	idtp.offset = (unsigned int) &idt;
 

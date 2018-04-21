@@ -1,10 +1,13 @@
 #include "interrupt.h"
 #include "asm.h"
 
-#include "drivers/framebuffer.h" // REMOVE later
+#include "util/logger.h"
+#include "pic.h"
+
+#include "drivers/keyb.h"
 
 /* Causes a software interrupt */
-void sw_interrupt() 
+void sw_interrupt()
 {
 	asm_sw_interrupt();
 }
@@ -23,5 +26,12 @@ struct cpu_state {
 /* The interrupt handler */
 void interrupt_handler(struct cpu_state cpu, unsigned int int_num, unsigned int err)
 {
-	fb_puts("Inside handler\n");
+	switch (int_num) {
+		case 0x21:
+			keyb_handle_scan_code(inb(0x60));
+			pic_ack();
+			break;
+		default:
+			log(CONSOLE, PANIC, "unknown interrupt occured.");
+	}
 }

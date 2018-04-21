@@ -65,6 +65,9 @@ int fb_write(char *buf, unsigned int len)
 				fb_write_cell(curr_pos, ' ', FB_COLOR_BLACK, FB_COLOR_LIGHT_GREY);
 				curr_pos = (curr_row + 1) * FB_COLS; // move to the row below
 				break;
+			case '\b':
+				fb_write_cell(--curr_pos, ' ', FB_COLOR_BLACK, FB_COLOR_LIGHT_GREY);
+				break;
 			default:
 				fb_write_cell(curr_pos++, buf[i], FB_COLOR_BLACK, FB_COLOR_LIGHT_GREY);
 		}

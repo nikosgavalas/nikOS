@@ -18,4 +18,12 @@ $ make run
 - [x] Framebuffer driver
 - [x] Serial comm driver
 - [x] Debugging utilities and gdb
-- [ ] Interrupts
+- [x] Interrupts
+- [x] Keyboard driver
+- [ ] Load and execute program from iso
+- [ ] Paging
+- [ ] Userspace
+- [ ] Filesystem
+- [ ] Syscalls
+- [ ] Multitasking
+- [ ] Networking
