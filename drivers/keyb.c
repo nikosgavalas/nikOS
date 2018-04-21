@@ -1,5 +1,5 @@
-#include "../pic.h"
-#include "framebuffer.h"
+#include <drivers/pic.h>
+#include <drivers/framebuffer.h>
 
 /* See https://wiki.osdev.org/PS/2_Keyboard */
 

@@ -1,5 +1,5 @@
-#include "gdt.h"
-#include "../asm.h"
+#include <descriptor_tables/gdt.h>
+#include <asm.h>
 
 #define GDT_NUM_SEGMENTS 3
 

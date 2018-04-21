@@ -1,6 +1,6 @@
-#include "logger.h"
-#include "../drivers/framebuffer.h"
-#include "../drivers/serial.h"
+#include <logger.h>
+#include <drivers/framebuffer.h>
+#include <drivers/serial.h>
 
 void log_puts(log_output_t dest, char *level, char *msg)
 {

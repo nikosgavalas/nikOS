@@ -1,13 +1,13 @@
-#include "system/gdt.h"
+#include <descriptor_tables/gdt.h>
+#include <descriptor_tables/idt.h>
 
-#include "drivers/serial.h"
-#include "drivers/framebuffer.h"
+#include <drivers/serial.h>
+#include <drivers/framebuffer.h>
+#include <drivers/pic.h>
 
-#include "util/logger.h"
-#include "idt.h"
-#include "interrupt.h"
+#include <interrupt/handler.h>
+#include <logger.h>
 
-#include "pic.h"
 
 char *welcome  = ""
 "        _ _     ___  ____  \n"

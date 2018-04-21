@@ -1,5 +1,5 @@
-#include "pic.h"
-#include "asm.h"
+#include <drivers/pic.h>
+#include <asm.h>
 
 #define MASTER_PIC_CMD_PORT     0x20
 #define MASTER_PIC_DATA_PORT    0x21

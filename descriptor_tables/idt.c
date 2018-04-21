@@ -1,8 +1,8 @@
-#include "idt.h"
-#include "asm.h"
-#include "system/gdt.h"
+#include <descriptor_tables/idt.h>
+#include <asm.h>
+#include <descriptor_tables/gdt.h>
 
-#include "asm_int_handlers.h"
+#include <interrupt/asm_int_handlers.h>
 
 /* Array of pointers to the handler functions declared 
  * in asm_int_handlers.h

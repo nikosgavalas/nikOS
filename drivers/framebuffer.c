@@ -1,5 +1,5 @@
-#include "../asm.h"
-#include "framebuffer.h"
+#include <asm.h>
+#include <drivers/framebuffer.h>
 
 #define FB_BASE_ADDR 0x000b8000
 

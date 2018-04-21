@@ -1,11 +1,12 @@
-OBJECTS = loader.o kmain.o asm.o idt.o interrupt.o asm_int_handlers.o pic.o
-OBJECTS += drivers/framebuffer.o drivers/serial.o drivers/keyb.o
-OBJECTS += system/gdt.o
-OBJECTS += util/logger.o
+OBJECTS = loader.o kmain.o 
+OBJECTS += lib/asm.o lib/logger.o 
+OBJECTS += interrupt/handler.o interrupt/asm_int_handlers.o 
+OBJECTS += drivers/framebuffer.o drivers/serial.o drivers/keyb.o drivers/pic.o
+OBJECTS += descriptor_tables/gdt.o descriptor_tables/idt.o
 
 CC = gcc
 # remove the -g flag if no debugging is needed, because it makes the executable bigger
-CFLAGS = -m32 -c -g 
+CFLAGS = -m32 -c -g -Iinclude
 CFLAGS += -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs
 CFLAGS += -Wall -Wextra #-Werror
 
@@ -53,6 +54,6 @@ debug: os.iso debug.gdb
 clean:
 	rm -rf *.o kernel.elf os.iso log.txt \
 		drivers/*.o \
-		system/*.o \
-		util/*.o \
-		asm/*.o
+		descriptor_tables/*.o \
+		interrupt/*.o \
+		lib/*.o

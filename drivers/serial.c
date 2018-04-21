@@ -1,5 +1,5 @@
-#include "serial.h"
-#include "../asm.h"
+#include <drivers/serial.h>
+#include <asm.h>
 
 /* The serial ports use I/O ports, for configuration.
  * All the I/O ports are calculated relative to the data port. This is because

@@ -1,8 +1,8 @@
-#include "interrupt.h"
-#include "asm.h"
+#include <interrupt/handler.h>
+#include <asm.h>
 
-#include "util/logger.h"
-#include "pic.h"
+#include <logger.h>
+#include <drivers/pic.h>
 
 #include "drivers/keyb.h"
 

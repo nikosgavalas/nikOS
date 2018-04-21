@@ -20,10 +20,9 @@ $ make run
 - [x] Debugging utilities and gdb
 - [x] Interrupts
 - [x] Keyboard driver
-- [ ] Load and execute program from iso
 - [ ] Paging
 - [ ] Userspace
 - [ ] Filesystem
 - [ ] Syscalls
-- [ ] Multitasking
+- [ ] Scheduler
 - [ ] Networking
