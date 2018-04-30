@@ -7,7 +7,7 @@ OBJECTS += descriptor_tables/gdt.o descriptor_tables/idt.o
 CC = gcc
 # remove the -g flag if no debugging is needed, because it makes the executable bigger
 CFLAGS = -m32 -c -g -Iinclude
-CFLAGS += -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs
+CFLAGS += -fno-stack-protector #-nostdlib -nostdinc -fno-builtin -nostartfiles -nodefaultlibs
 CFLAGS += -Wall -Wextra #-Werror
 
 LD = ld

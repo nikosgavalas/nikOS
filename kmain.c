@@ -5,6 +5,8 @@
 #include <drivers/framebuffer.h>
 #include <drivers/pic.h>
 
+#include <mm/paging.h>
+
 #include <interrupt/handler.h>
 #include <logger.h>
 
@@ -18,7 +20,7 @@ char *welcome  = ""
 "";
 
 /* Kernel Main */
-void kmain() 
+void kmain()
 {
 	/* Clear the screen */
 	fb_clear();
@@ -40,6 +42,9 @@ void kmain()
 
 	log(CONSOLE, INFO, "Initializing PIC...");
 	pic_init();
+
+	log(CONSOLE, INFO, "Enable paging...");
+	paging_init();
 
 	/* At this point the kernel is activated only through interrupts */
 	for (;;) {

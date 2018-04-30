@@ -24,5 +24,6 @@ $ make run
 - [ ] Userspace
 - [ ] Filesystem
 - [ ] Syscalls
+- [ ] StdLib
 - [ ] Scheduler
 - [ ] Networking
