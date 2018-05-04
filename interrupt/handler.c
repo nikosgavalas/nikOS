@@ -26,6 +26,7 @@ struct cpu_state {
 } __attribute__((packed));
 
 /* The interrupt handler */
+/* TODO: Handle more interrupts */
 void interrupt_handler(struct cpu_state cpu, unsigned int int_num, unsigned int err)
 {
 	switch (int_num) {
@@ -34,6 +35,6 @@ void interrupt_handler(struct cpu_state cpu, unsigned int int_num, unsigned int 
 			pic_ack();
 			break;
 		default:
-			log(CONSOLE, PANIC, "unknown interrupt occured.");
+			klog(CONSOLE, PANIC, "unknown interrupt occured.");
 	}
 }

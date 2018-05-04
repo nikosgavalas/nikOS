@@ -9,6 +9,20 @@
 #define DATA_SEGMENT_BASE 0
 #define DATA_SEGMENT_LIMIT 0xffffffff
 
+#define ACCESS_BYTE_BASE 0x10
+#define FLAGS_BASE 0x00
+
+#define PRESENT 1 << 7
+#define PRIVL_RING_3 3 << 5           /* default is ring 0 */
+#define EXECUTABLE_SEG 1 << 3
+#define DIRECTION_DOWN 1 << 2         /* use only for data segments */
+#define CONFORMING_SEG 1 << 2         /* use only for code segments */
+#define READABLE_SEG 1 << 1           /* use only for data segments */
+#define WRITABLE_SEG 1 << 1	          /* use only for code segments */
+#define ACCESSED 1 << 1               /* the cpu manages this - read only */
+#define PAGE_GRANULARITY 1 << 3
+#define PROTECTED_32_BIT_MODE 1 << 2
+
 struct gdt_entry gdt[GDT_NUM_SEGMENTS];
 struct gdt_ptr gdtp;
 
@@ -40,15 +54,19 @@ void gdt_install()
 	 * Flags = 1100: Gr = 1 (4KiB page granularity)
 	 *               Sz = 1 (32-bit protected mode)
 	 */
-	gdt_init_segment(CODE_SEG, CODE_SEGMENT_BASE, CODE_SEGMENT_LIMIT, 
-	                 0b10011010, 0b00001100);
+	unsigned char code_seg_access_byte = ACCESS_BYTE_BASE | PRESENT | EXECUTABLE_SEG | READABLE_SEG;
+	unsigned char code_seg_flags = FLAGS_BASE | PAGE_GRANULARITY | PROTECTED_32_BIT_MODE;
+	gdt_init_segment(CODE_SEG, CODE_SEGMENT_BASE, CODE_SEGMENT_LIMIT,
+					 code_seg_access_byte, code_seg_flags);
 
 	/* Data segment: same as the CS, except Ex bit is 0 (->DS)
 	 * With these configs in the DS -> the stack grows down,
 	 * and also the DS is writable.
 	 */
-	gdt_init_segment(DATA_SEG, DATA_SEGMENT_BASE, DATA_SEGMENT_LIMIT, 
-	                 0b10010010, 0b00001100);
+	unsigned char data_seg_access_byte = ACCESS_BYTE_BASE | PRESENT | WRITABLE_SEG;
+	unsigned char data_seg_flags = FLAGS_BASE | PAGE_GRANULARITY | PROTECTED_32_BIT_MODE;
+	gdt_init_segment(DATA_SEG, DATA_SEGMENT_BASE, DATA_SEGMENT_LIMIT,
+					 data_seg_access_byte, data_seg_flags);
 
 	gdtp.size = sizeof(gdt) - 1;
 	gdtp.offset = (unsigned int) &gdt;

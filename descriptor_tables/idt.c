@@ -4,6 +4,16 @@
 
 #include <interrupt/asm_int_handlers.h>
 
+#define FLAGS_BASE 0x00
+#define PRESENT 1 << 7
+#define CALLABLE_FROM_RING_3 11 << 5
+#define TASK_GATE 1 << 4
+#define TYPE_TASK_32 0x5
+#define TYPE_INTR_16 0x6
+#define TYPE_TRAP_16 0x7
+#define TYPE_INTR_32 0xe
+#define TYPE_TRAP_32 0xf
+
 /* Array of pointers to the handler functions declared 
  * in asm_int_handlers.h
  */
@@ -301,9 +311,10 @@ void idt_install()
 	/* Flags = 1000 1110: Present = 1, DPL = 00 (Ring 0), S = 1 (interrupt gate)
 	 *                    Type = 1110 (32-bit interrupt gate)
 	 */
+	unsigned char flags = FLAGS_BASE | PRESENT | TYPE_INTR_32;
 	for (unsigned int i = 0; i < 256; i++) {
 		init_idt_entry((unsigned char) i, (unsigned int) asm_int_handlers[i],
-		               SEGMENT_SELECTOR(CODE_SEG), 0b10001110);
+		               SEGMENT_SELECTOR(CODE_SEG), flags);
 	}
 	
 	idtp.size = (unsigned short) sizeof(idt) - 1;

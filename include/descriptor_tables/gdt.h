@@ -16,6 +16,7 @@ struct gdt_ptr {
 	unsigned int offset;
 } __attribute__((packed));
 
+/* usage of this macro example: SEGMENT_SELECTOR(CODE_SEG) (use with gdt_segment_t) */
 #define SEGMENT_SELECTOR(x) (sizeof(struct gdt_entry) * x)
 
 typedef enum gdt_segment {

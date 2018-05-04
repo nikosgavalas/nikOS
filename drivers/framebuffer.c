@@ -1,7 +1,9 @@
 #include <asm.h>
 #include <drivers/framebuffer.h>
 
-#define FB_BASE_ADDR 0x000b8000
+#define FB_BASE_ADDR 0xc00b8000  /* normally this address is 0x000b8000, but since
+                                  * I loaded the kernel on 0xc0000000, I needed to change
+								  * this too */
 
 #define FB_PORT_COMMAND 0x3d4
 #define FB_PORT_DATA 0x3d5

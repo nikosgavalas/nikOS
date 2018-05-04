@@ -3,6 +3,7 @@ OBJECTS += lib/asm.o lib/logger.o
 OBJECTS += interrupt/handler.o interrupt/asm_int_handlers.o 
 OBJECTS += drivers/framebuffer.o drivers/serial.o drivers/keyb.o drivers/pic.o
 OBJECTS += descriptor_tables/gdt.o descriptor_tables/idt.o
+OBJECTS += mm/paging.o
 
 CC = gcc
 # remove the -g flag if no debugging is needed, because it makes the executable bigger

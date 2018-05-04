@@ -20,7 +20,10 @@ $ make run
 - [x] Debugging utilities and gdb
 - [x] Interrupts
 - [x] Keyboard driver
-- [ ] Paging
+- [x] Enable 4MiB Paging
+- [x] Load the kernel to the upper half of mem
+- [ ] Page Frame Allocator
+- [ ] Kernel Heap
 - [ ] Userspace
 - [ ] Filesystem
 - [ ] Syscalls

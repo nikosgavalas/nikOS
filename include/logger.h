@@ -14,6 +14,6 @@ typedef enum log_output {
 	COM1
 } log_output_t;
 
-void log(log_output_t dest, log_level_t lvl, char* msg);
+void klog(log_output_t dest, log_level_t lvl, char* msg);
 
 #endif // _LOGGER_H_INCLUDED_
