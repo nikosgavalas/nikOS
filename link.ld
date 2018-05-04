@@ -1,7 +1,5 @@
 ENTRY(loader)
-/* 
 OUTPUT_FORMAT(elf32-i386) 
-*/
 
 SECTIONS {
 	/* The kernel will live at 3GB + 1MB in the virtual

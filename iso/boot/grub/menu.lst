@@ -1,6 +1,5 @@
 default=0
 timeout=0
 
-title os
+title nikOS
 kernel /boot/kernel.elf
-

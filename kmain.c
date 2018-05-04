@@ -20,6 +20,7 @@ char *welcome  = ""
 "";
 
 /* Kernel Main */
+// TODO: multiboot_info is a pointer to a specific struct. fix this
 void kmain(unsigned int multiboot_magic, unsigned int multiboot_info)
 {
 	/* Clear the screen */

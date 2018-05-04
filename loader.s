@@ -45,8 +45,8 @@ multiboot_header:
 	dd	CHECKSUM                                  
 
 
-_loader:                                            ; linker entry point
 loader equ (_loader - KERNEL_VIRTUAL_BASE)
+_loader:                                            ; linker entry point
 	; Until paging is set up, the code must be position-independent and use physical
     ; addresses, not virtual ones
 
@@ -79,7 +79,7 @@ higher_half_entry:
 
 	mov	esp, kernel_stack + KERNEL_STACK_SIZE     ; point esp to the end of the kernel stack
 	push eax     ; pass the multiboot magic number
-	add ebx, KERNEL_VIRTUAL_BASE
+	add	ebx, KERNEL_VIRTUAL_BASE
     push ebx     ; pass multiboot info structure -- WARNING: This is a 
 	             ; physical address and may not be in the first 4MiB
 	call kmain
