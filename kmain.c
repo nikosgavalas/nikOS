@@ -46,6 +46,8 @@ void kmain(unsigned int multiboot_magic, unsigned int multiboot_info)
 
 	//paging_init();
 
+	// minprintf("%c", 's');
+
 	/* At this point the kernel is activated only through interrupts */
 	for (;;) {
 		asm ("hlt");

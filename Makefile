@@ -57,4 +57,5 @@ clean:
 		drivers/*.o \
 		descriptor_tables/*.o \
 		interrupt/*.o \
-		lib/*.o
+		lib/*.o \
+		mm/*.o

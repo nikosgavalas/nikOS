@@ -45,8 +45,8 @@ multiboot_header:
 	dd	CHECKSUM                                  
 
 
-loader equ (_loader - KERNEL_VIRTUAL_BASE)
-_loader:                                            ; linker entry point
+loader equ (_loader - KERNEL_VIRTUAL_BASE)          ; linker entry point
+_loader:
 	; Until paging is set up, the code must be position-independent and use physical
     ; addresses, not virtual ones
 

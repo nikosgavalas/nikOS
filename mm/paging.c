@@ -1,5 +1,4 @@
 #include <mm/paging.h>
-#include <asm.h>
 
 /* See https://wiki.osdev.org/Paging */
 
@@ -11,9 +10,9 @@
 #define WRITE_THROUGH   1 << 3 /* write-back by default */
 #define ACCESS_BY_ALL   1 << 2 /* only supervisor access by default */
 #define READ_WRITE      1 << 1 /* read only by default */
-#define PRESENT 1			   /* if set, the page is actually in physical memory at the moment. 
-                                  When a page is swapped out, it is not in physical memory and therefore not 
-								  'Present'. If a page is called, but not present, a page fault will occur */
+#define PRESENT         1 << 0 /* if set, the page is actually in physical memory at the moment. 
+                                * When a page is swapped out, it is not in physical memory and therefore not 
+                                * 'Present'. If a page is called, but not present, a page fault will occur */
 
 /* Page Table Entry Flags (in addition to the above - yes they mostly use the same flags) */
 #define PREVENT_TLB_UPDATE 1 << 8
@@ -28,8 +27,8 @@ page_dir_entry mk_page_dir_entry(unsigned int addr, unsigned char avail, unsigne
 	
 	addr &= 0xfffff000;
 	ret |= addr;
-	
-	flags &= 0b110111111;
+
+	flags &= (unsigned int) 0b110111111;
 	ret |= flags;
 	
 	return ret;
