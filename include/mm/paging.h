@@ -3,4 +3,4 @@
 
 void paging_init();
 
-#endif // _PAGING_H_INCLUDED_
+#endif  // _PAGING_H_INCLUDED_

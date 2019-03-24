@@ -258,4 +258,4 @@ void asm_int_handler_253();
 void asm_int_handler_254();
 void asm_int_handler_255();
 
-#endif // _ASM_INT_HANDLERS_H_INCLUDED_
+#endif  // _ASM_INT_HANDLERS_H_INCLUDED_

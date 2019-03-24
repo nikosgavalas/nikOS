@@ -4,4 +4,4 @@
 void sw_interrupt();
 void interrupt_handler();
 
-#endif // _INTERRUPT_H_INCLUDED_
+#endif  // _INTERRUPT_H_INCLUDED_

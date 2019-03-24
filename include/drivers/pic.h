@@ -6,4 +6,4 @@ void pic_init();
 /* Send an acknowledgement to the pic every time an irq is handled */
 void pic_ack();
 
-#endif // _PIC_H_INCLUDED_
+#endif  // _PIC_H_INCLUDED_

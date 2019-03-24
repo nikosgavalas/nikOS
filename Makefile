@@ -22,40 +22,40 @@ QEMU = qemu-system-i386
 all: kernel.elf
 
 kernel.elf: $(OBJECTS)
-	$(LD) $(LDFLAGS) $(OBJECTS) -o $@
+    $(LD) $(LDFLAGS) $(OBJECTS) -o $@
 
 os.iso: kernel.elf
-	cp $< iso/boot/$<
-	genisoimage -R \
-		-b boot/grub/stage2_eltorito \
-		-no-emul-boot \
-		-boot-load-size 4 \
-		-A os \
-		-input-charset utf8 \
-		-quiet \
-		-boot-info-table \
-		-o os.iso \
-		iso
+    cp $< iso/boot/$<
+    genisoimage -R \
+        -b boot/grub/stage2_eltorito \
+        -no-emul-boot \
+        -boot-load-size 4 \
+        -A os \
+        -input-charset utf8 \
+        -quiet \
+        -boot-info-table \
+        -o os.iso \
+        iso
 
 run: os.iso
-	$(QEMU) -monitor stdio \
-		-cdrom $? \
-		-serial file:log.txt
+    $(QEMU) -monitor stdio \
+        -cdrom $? \
+        -serial file:log.txt
 
 # make sure to run $ make debug with the -g flag in the gcc
 debug: os.iso debug.gdb
-	$(QEMU) -S -s -cdrom $<
+    $(QEMU) -S -s -cdrom $<
 
 %.o: %.c
-	$(CC) $(CFLAGS) $< -o $@
+    $(CC) $(CFLAGS) $< -o $@
 
 %.o: %.s
-	$(AS) $(ASFLAGS) $< -o $@
+    $(AS) $(ASFLAGS) $< -o $@
 
 clean:
-	rm -rf *.o kernel.elf os.iso log.txt \
-		drivers/*.o \
-		descriptor_tables/*.o \
-		interrupt/*.o \
-		lib/*.o \
-		mm/*.o
+    rm -rf *.o kernel.elf os.iso log.txt \
+        drivers/*.o \
+        descriptor_tables/*.o \
+        interrupt/*.o \
+        lib/*.o \
+        mm/*.o
