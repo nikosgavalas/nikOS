@@ -1,12 +1,12 @@
 #ifndef _FRAMEBUFFER_H_INCLUDED_
 #define _FRAMEBUFFER_H_INCLUDED_
 
-/* The framebuffer consists of 80 columns and 25 rows 
+/* The framebuffer consists of 80 columns and 25 rows
  * of "cells" each of which is 2 bytes long
  */
 #define FB_COLS 80
 #define FB_ROWS 25
-#define FB_MAX_POS 80*25
+#define FB_MAX_POS 80 * 25
 
 #define FB_COLOR_BLACK 0
 #define FB_COLOR_BLUE 1
@@ -33,4 +33,4 @@ int fb_write(char *buf, unsigned int len);
 void fb_puts(char *buf);
 void fb_putc(char c);
 
-#endif // _FRAMEBUFFER_H_INCLUDED_
+#endif  // _FRAMEBUFFER_H_INCLUDED_

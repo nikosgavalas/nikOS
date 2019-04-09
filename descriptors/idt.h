@@ -3,4 +3,4 @@
 
 void idt_install();
 
-#endif // _IDT_H_INCLUDED_
+#endif  // _IDT_H_INCLUDED_

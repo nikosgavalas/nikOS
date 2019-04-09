@@ -10,25 +10,25 @@ extern interrupt_handler  ; defined in 'interrupt.c'
 %macro asm_no_error_code_int_handler 1
 global asm_int_handler_%1
 asm_int_handler_%1:
-	push    dword 0                         ; push 0 as error code
-	push    dword %1                        ; push the interrupt number
-	jmp     asm_generic_interrupt_handler   ; jump to the common handler
+    push    dword 0                         ; push 0 as error code
+    push    dword %1                        ; push the interrupt number
+    jmp     asm_generic_interrupt_handler   ; jump to the common handler
 %endmacro
 
 %macro asm_error_code_int_handler 1
 global asm_int_handler_%1
 asm_int_handler_%1:
-	push    dword %1                        ; push the interrupt number
-	jmp     asm_generic_interrupt_handler   ; jump to the common handler
+    push    dword %1                        ; push the interrupt number
+    jmp     asm_generic_interrupt_handler   ; jump to the common handler
 %endmacro
 
 asm_generic_interrupt_handler:
-	pushad                                  ; push all general purpose regs to the stack
-	                                        ; in this order: eax, ecx, edx, ebx, esp, ebp, esi, edi
-	call interrupt_handler
-	popad
-	add	esp, 8                              ; fix the stack pointer
-	iret
+    pushad                                  ; push all general purpose regs to the stack
+                                            ; in this order: eax, ecx, edx, ebx, esp, ebp, esi, edi
+    call interrupt_handler
+    popad
+    add	esp, 8                              ; fix the stack pointer
+    iret
 
 ; The interrupts that have an error code are 8, 10, 11, 12, 13, 14, 17, 30
 ; See: https://wiki.osdev.org/Exceptions

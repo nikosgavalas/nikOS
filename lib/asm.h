@@ -17,4 +17,4 @@ void asm_sw_interrupt();
 void asm_enable_interrupts();
 void asm_disable_interrupts();
 
-#endif // _ASM_H_INCLUDED_
+#endif  // _ASM_H_INCLUDED_

@@ -2,26 +2,27 @@ OBJECTS = loader.o kmain.o
 OBJECTS += lib/asm.o lib/logger.o 
 OBJECTS += interrupt/handler.o interrupt/asm_int_handlers.o 
 OBJECTS += drivers/framebuffer.o drivers/serial.o drivers/keyb.o drivers/pic.o
-OBJECTS += descriptor_tables/gdt.o descriptor_tables/idt.o
+OBJECTS += descriptors/gdt.o descriptors/idt.o
 
 CC = gcc
+
 # remove the -g flag if no debugging is needed, because it makes the executable bigger
-CFLAGS = -m32 -c -g -Iinclude
+CFLAGS = -m32 -c -g -I.
 CFLAGS += -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs
 CFLAGS += -Wall -Wextra #-Werror
 
 LD = ld
-LDFLAGS = -T link.ld -melf_i386
+LDFLAGS = -melf_i386
 
-AS = nasm
-ASFLAGS = -f elf
+ASM = nasm
+ASMFLAGS = -f elf
 
 QEMU = qemu-system-i386
 
 all: kernel.elf
 
-kernel.elf: $(OBJECTS)
-	$(LD) $(LDFLAGS) $(OBJECTS) -o $@
+kernel.elf: $(OBJECTS) link.ld
+	$(LD) $(LDFLAGS) -T link.ld $(OBJECTS) -o $@
 
 os.iso: kernel.elf
 	cp $< iso/boot/$<
@@ -49,11 +50,11 @@ debug: os.iso debug.gdb
 	$(CC) $(CFLAGS) $< -o $@
 
 %.o: %.s
-	$(AS) $(ASFLAGS) $< -o $@
+	$(ASM) $(ASMFLAGS) $< -o $@
 
 clean:
 	rm -rf *.o kernel.elf os.iso log.txt \
 		drivers/*.o \
-		descriptor_tables/*.o \
+		descriptors/*.o \
 		interrupt/*.o \
 		lib/*.o
