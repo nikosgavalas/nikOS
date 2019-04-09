@@ -25,9 +25,9 @@ asm_int_handler_%1:
 asm_generic_interrupt_handler:
     pushad                                  ; push all general purpose regs to the stack
                                             ; in this order: eax, ecx, edx, ebx, esp, ebp, esi, edi
-    call interrupt_handler
+    call    interrupt_handler
     popad
-    add	esp, 8                              ; fix the stack pointer
+    add esp, 8                              ; fix the stack pointer
     iret
 
 ; The interrupts that have an error code are 8, 10, 11, 12, 13, 14, 17, 30
