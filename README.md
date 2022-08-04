@@ -2,7 +2,9 @@
 
 Minimal hobby Operating System built from scratch, for learning purposes.
 
-[LittleOSbook](https://littleosbook.github.io/) helped me get started. It's a good resource, even if it has some errors and doesn't mention at all certain important things...which I later found on the awesome [OSDev Wiki](https://wiki.osdev.org/Expanded_Main_Page).
+Resources I used:
+- [LittleOSbook](https://littleosbook.github.io/)
+- [OSDev Wiki](https://wiki.osdev.org/Expanded_Main_Page)
 
 To use:
 ```
@@ -10,7 +12,7 @@ $ apt install qemu nasm genisoimage build-essential
 $ make run
 ```
 
-## Status:
+## Roadmap:
 
 - [x] Boot with GRUB
 - [x] Set up a stack and call C
@@ -21,8 +23,8 @@ $ make run
 - [x] Interrupts
 - [x] Keyboard driver
 - [ ] Paging
-- [ ] Userspace
+- [ ] Shell
 - [ ] Filesystem
-- [ ] Syscalls
+- [ ] Utilities
 - [ ] Scheduler
 - [ ] Networking
