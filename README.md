@@ -8,7 +8,7 @@ Resources I used:
 
 To use:
 ```
-$ apt install qemu nasm genisoimage build-essential
+$ apt install qemu qemu-system nasm genisoimage build-essential
 $ make run
 ```
 
